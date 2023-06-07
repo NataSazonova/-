@@ -1,0 +1,43 @@
+using System;
+class Program
+{
+   static void Main()
+    {
+        double[] arr = { 2.5, -1.7, 3.8, -4.2, 5.1, -6.3, 7.4, -8.6, 9.7, -10.9 };
+       double sumPositive = 0.0;
+        double product = 1.0;
+
+        int maxIndex = 0;
+        int minIndex = 0;
+        for (int i = 1; i < arr.Length; i++)
+        {
+            if (Math.Abs(arr[i]) > Math.Abs(arr[maxIndex]))
+            {
+                maxIndex = i;
+            }
+            if (Math.Abs(arr[i]) < Math.Abs(arr[minIndex]))
+            {
+                minIndex = i;
+            }
+        }
+        int startIndex = Math.Min(maxIndex, minIndex) + 1;
+        int endIndex = Math.Max(maxIndex, minIndex);
+        for (int i = startIndex; i < endIndex; i++)
+        {
+            product *= arr[i];
+        }
+        foreach (double num in arr)
+        {
+            if (num > 0)
+            {
+                sumPositive += num;
+            }
+        }
+
+        Array.Sort(arr);
+        Array.Reverse(arr);
+        Console.WriteLine("Сума додатних елементів: " + sumPositive);
+        Console.WriteLine("Добуток елементів між максимальним і мінімальним елементами: " + product);
+        Console.WriteLine("Упорядкований масив за спаданням: " + string.Join(", ", arr));
+    }
+}
