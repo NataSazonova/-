@@ -1,0 +1,41 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <locale>
+#include <algorithm>
+
+int main() {
+    setlocale(LC_ALL, "ukr");
+    std::ifstream inputFile("input.txt");
+    if (!inputFile) {
+        std::cerr << "Помилка відкриття файлу input.txt" << std::endl;
+        return 1;
+    }
+
+    // Зчитування елементів з файлу input
+    std::vector<int> elements;
+    int value;
+    while (inputFile >> value) {
+        elements.push_back(value);
+    }
+    inputFile.close();
+
+    // Сортування елементів за зростанням
+    std::sort(elements.begin(), elements.end());
+
+    std::ofstream outputFile("output.txt");
+    if (!outputFile) {
+        std::cerr << "Помилка відкриття файлу output.txt" << std::endl;
+        return 1;
+    }
+
+    // Запис відсортованих елементів у файл output
+    for (const auto& element : elements) {
+        outputFile << element << std::endl;
+    }
+    outputFile.close();
+
+    std::cout << "Елементи файлу input.txt були відсортовані та записані у файл output.txt" << std::endl;
+
+    return 0;
+}
